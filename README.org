@@ -1,6 +1,6 @@
 * About
 *daruma* is:
-- a pun on *Dar*kr*oom*;
+- a pun on /Dar-kr-oom/;
 - Japanese /Red/ doll - a talisman that brings luck and happiness (i.e. 100% game completion);
 - a tiny little tool I wish existed back in my childhood.
 
