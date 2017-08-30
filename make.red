@@ -22,7 +22,7 @@ release: does [
     ]
 
     encap
-        source-of/header system/options/script
+        source-of/header %./make.red                                                   ; system/options/script won't work from console
         reduce [%./src/ scripts]
         load %.config
 ]
@@ -31,3 +31,5 @@ debug: does [
     change-dir %./src/
     forall scripts [do first scripts]
 ]
+
+'OK
