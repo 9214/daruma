@@ -6,9 +6,14 @@ Also, bug squashing. It's not a Starship Trooper's poligon, but we consider bugs
 
 I believe that it's a good opportunity for both of us to learn how to communicate is OSS world and make collaborative stuff together in an informal and relaxed way. So, just keep fun in a house.
 
-*A few prerequisites though:*
+*A few prerequisites:*
 - stick with the original coding style and format everything accordingly (one exception is /dialects/ or when clarity should be over clutter);
 - test that everything works;
 - then test it again;
 - leave some comment breadcrumbs on your gotchas and non-trivial coding somersaults;
+- as this project strives to be platform-independent, don't implement changes that go against this idea;
+- less is more;
 - be nice.
+
+*A couple of details:*
+- when working with the codebase, please use provided ~%make.red~ script in a root directory if you're compiling an executable; current alpha compiler sometimes can't correctly process way too dynamic code and that leads to unpleasant errors and unexpected behavior that could be caught only /after/ compilation;
