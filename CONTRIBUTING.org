@@ -1,0 +1,14 @@
+* Making daruma better
+If you're, as a newbie, looking for a chance to prove oneself -- here it is! 
+
+Start working with any of the issues I've left in this repo and hone your skills. Some of them are pretty trivial, most of them are fairly interesting. 
+Also, bug squashing. It's not a Starship Trooper's poligon, but we consider bugs to be bad too.
+
+I believe that it's a good opportunity for both of us to learn how to communicate is OSS world and make collaborative stuff together in an informal and relaxed way. So, just keep fun in a house.
+
+*A few prerequisites though:*
+- stick with the original coding style and format everything accordingly (one exception is /dialects/ or when clarity should be over clutter);
+- test that everything works;
+- then test it again;
+- leave some comment breadcrumbs on your gotchas and non-trivial coding somersaults;
+- be nice.
