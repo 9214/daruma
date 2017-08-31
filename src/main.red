@@ -6,4 +6,4 @@ Red [
     Tabs:    4
 ]
 
-unlock view/flags window [no-min no-max]
+unless unlock [view/flags window [no-min no-max]]
