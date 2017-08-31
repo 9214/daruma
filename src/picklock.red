@@ -30,7 +30,7 @@ picklock: context [
     set 'unlock func [/local slots [block! none!]][
         all [
             slots: scan
-            forall slots [zero first slots]
+            forall slots [zero first slots on]
         ]
     ]
 ]
