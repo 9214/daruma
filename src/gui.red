@@ -6,6 +6,8 @@ Red [
     Tabs:    4
 ]
 
+system/view/capturing?: yes
+
 ; == main UI ==
 window: layout with [decoder/converter][
     title    "daruma"
@@ -26,6 +28,17 @@ window: layout with [decoder/converter][
         ]
         on-time [
             blink white off
+        ]
+        on-detect [
+            attempt [
+                keycode: to integer! event/key
+                all [
+                    16 <= length? f/text
+                    08 <> keycode                                                      ; backspace
+                    13 <> keycode                                                      ; enter
+                    'stop
+                ]
+            ]
         ]
 
         do [
