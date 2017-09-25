@@ -254,7 +254,7 @@ decoder: context [
                         set [<> ><] do compose [
                             (if mask = 00000003h [[reverse copy]]) [>> <<]
                         ]
-                        redo [digest/(index) & redo [mask <> offset] >< offset]
+                        redo [digest/:index & redo [mask <> offset] >< offset]
                     ] :| 0
                 ]
             ]
