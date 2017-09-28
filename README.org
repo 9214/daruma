@@ -46,7 +46,7 @@ If *you* place *daruma* in a *gamedir* and launch it, it will /silently/ patch a
 If *you* launch *daruma* in any other directory that /doesn't looks like/ *gamedir* (i.e. doesn't contain any of the save files), a tiny window will pop up for you to enter 16-character Internet code. Well, just do it and hit Enter. Then, if everything is fine, write-down decoded locker code and use it to grab 13th MDisk.
 
 * Contributing
-Even though codebase is miniscule, there're a few things to do for those who are new to programming and open source. Don't be shy and consult [[./CONTRIBUTING.org][CONTRUBUTING]] file for details.
+Even though codebase is miniscule, there're a few things to do for those who are new to programming and open source. Don't be shy and consult [[./CONTRIBUTING.org][CONTRIBUTING]] file for details.
 
 * Repo structure
 - ~src/~ :: main directory with all scripts;
