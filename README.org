@@ -15,6 +15,7 @@ Grab [[https://github.com/9214/daruma/releases/latest][latest release]] for your
 *Please note* that only Win version was tested, and MacOS bundle just cross-compiled. For Linux folks - sorry guys, GTK graphical backend is a work-in-progress, hence no GUI and executable. Either use Wine or other fan-made implementations.
 
 ** From source
+- *prerequisite:* Internet connection;
 - download [[http://www.red-lang.org/p/download.html][Red toolchain]] ([[http://red.github.io/#download][mirror]]);
 - fork or download this repo;
 - create a ~.config~ file in downloaded (and unpacked) directory in the following format:
