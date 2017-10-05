@@ -8,14 +8,7 @@ Red [
 
 ; == macros ==
 #do [
-    unfold: func [
-        range [block!]
-        /local
-            spec
-            index
-            bump
-            range*
-    ][
+    unfold: func [range [block!] /local spec index bump range*][
         range*: copy range
         to string! collect [
             while [not tail? range*][
@@ -48,9 +41,9 @@ Red [
 ]
 
 #macro make-bge-base64: func [/local bge-base64][
-    bge-base64: make-base64
-    foreach [char sub] "+?/!I+O\l&0/" [poke find/case bge-base64 char 1 sub]
-    return bge-base64                                                                  ; in fact it's a mix of Base64 and Base58
+    also 
+        bge-base64: make-base64                                                        ; in fact it's a mix of Base64 and Base58
+        foreach [char sub] "+?/!I+O\l&0/" [poke find/case bge-base64 char 1 sub]
 ]
 
 #macro make-primes: func [bump [integer!] /local i][
@@ -86,16 +79,19 @@ decoder: context [
         valid?: func [
             metainfo [object!]
             /local
-                rule  [block!]
-                l     [bitset!]
-                d     [bitset!]
-                entry [block!]
-                field [time! integer!]
-                base  [time! integer!]
-                top   [time! integer!]
-                value [time! integer!]
+                rule   [block!]
+                letter [bitset!]
+                digit  [bitset!]
+                entry  [block!]
+                field  [time! integer!]
+                base   [time! integer!]
+                top    [time! integer!]
+                value  [time! integer!]
         ][
-            rule:  [(l: charset letters d: charset digits) l d l d]
+            rule:  [
+                (letter: charset letters digit: charset digits) 
+                2 [letter digit]
+            ]
             entry: [field base top]
             all collect [
                 foreach :entry bind scheme metainfo [
@@ -131,7 +127,7 @@ decoder: context [
             remove at head insert at dwords 2 reverse dissect dwords/2 6
             dwords/7: pick-lock to binary! dwords/7
 
-            make object! collect [
+            object collect [
                 foreach key fields: extract scheme 3 [
                     keep reduce [to set-word! key dwords/(index? find fields key)]
                 ]
@@ -234,18 +230,17 @@ decoder: context [
             digest/:index: position | (flipped-bit << offset)
         ]
 
-        shuffle: func [/local index [tag!] permutation [block!]][
+        shuffle: has [index [tag!] permutation [block!]][
             foreach [index permutation] p-box [context permutation]
         ]
 
-        transpose: func [
-            /local
-                entry  [block!]
-                index  [integer!]
-                mask   [integer!]
-                offset [integer!]
-                <>     [word!]
-                ><     [word!]
+        transpose: has [
+            entry  [block!]
+            index  [integer!]
+            mask   [integer!]
+            offset [integer!]
+            <>     [word!]
+            ><     [word!]
         ][
             game-data: collect [
                 keep digest/15 * 60 + digest/14 * 60 + digest/16                     ; total playtime, hh:mm:ss
@@ -260,13 +255,12 @@ decoder: context [
             ]
         ]
 
-        check: func [
-            /local
-                grain    [block!]
-                checksum [integer!]
-                salt     [integer!]
-                mask     [integer!]
-                offset   [integer!]
+        check: has [
+            grain    [block!]
+            checksum [integer!]
+            salt     [integer!]
+            mask     [integer!]
+            offset   [integer!]
         ][
             grain: [
                 FFC00000h 22
