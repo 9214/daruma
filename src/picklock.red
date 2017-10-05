@@ -14,7 +14,7 @@ picklock: context [
         ]
     ]
 
-    scan: func [/local file [file!] slots [block!]][
+    scan: has [file [file!] slots [block!]][
         slots: collect [
             foreach file read %./ [
                 if slot? file [keep file]
@@ -27,7 +27,7 @@ picklock: context [
         write/binary/seek slot #{00} 00002D58h
     ]
 
-    set 'unlock func [/local slots [block! none!]][
+    set 'unlock has [slots [block! none!]][
         all [
             slots: scan
             forall slots [zero first slots on]
