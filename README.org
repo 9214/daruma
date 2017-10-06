@@ -22,12 +22,18 @@ Grab [[https://github.com/9214/daruma/releases/latest][latest release]] for your
 red: "<path/to/red/toolchain/in/system/specific/format>"
 opt: "<compilation options (call toolchain with --help flag to list them)>"
 #+END_SRC
+example:
+#+BEGIN_SRC red
+red: "/home/user/dev/red/red-latest"
+opt: "-c -t WindowsXP -o /home/user/daruma"
+#+END_SRC
+
 - call toolchain with ~--cli~ flag and:
 #+BEGIN_SRC red
 >> cd %/red/file/path/to/daruma/dir/
 >> do %make.red
 == OK
->> release
+>> compile
 #+END_SRC
 - that's it, compiled binary should be in a root directory.
 
@@ -57,7 +63,7 @@ Even though codebase is miniscule, there're a few things to do for those who are
 * API
 Two words are exposed into global context:
 - ~decode~ :: takes a valid Internet code, decodes it and spits out ~object!~ with game stats (locker code included), otherwise returns an error as ~issue!~ value.
-- ~unclock~ :: patches all savefiles in current directory; if none is found, returns ~none~.
+- ~unlock~ :: patches all savefiles in current directory; if none is found, returns ~none~.
 
 * License
 Peace out.
