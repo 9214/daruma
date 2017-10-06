@@ -13,7 +13,7 @@ Red [
 
 scripts: [%aids.red %decoder.red %picklock.red %gui.red %main.red]
 
-release: does [
+compile: does [
     do https://raw.githubusercontent.com/9214/rtool/master/encap.red
     encap
         source-of/header %./make.red                                                   ; system/options/script won't work from console
@@ -21,7 +21,7 @@ release: does [
         load %.config
 ]
 
-debug: does [
+interpret: does [
     change-dir %./src/
     forall scripts [do first scripts]
 ]
