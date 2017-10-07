@@ -36,7 +36,7 @@ opt: "-c -t WindowsXP -o /home/user/daruma"
 == OK
 >> compile
 #+END_SRC
-- that's it, compiled binary should be in a root directory.
+- that's it, compiled binary should be in a root/specified directory.
 
 * Usage
 Carefully examine this terms:
