@@ -16,4 +16,4 @@ I believe that it's a good opportunity for both of us to learn how to communicat
 - be nice.
 
 *A couple of details:*
-- when working with the codebase, please use provided ~%make.red~ script in a root directory if you're compiling an executable; current alpha compiler sometimes can't correctly process way too dynamic code and that leads to unpleasant errors and unexpected behavior that could be caught only /after/ compilation;
+- when working with the codebase, please use provided ~%make.red~ script in a root directory if you're compiling an executable; current alpha compiler sometimes can't correctly process way too dynamic code and that leads to unpleasant errors and unexpected behavior that could be caught only /after/ compilation.
