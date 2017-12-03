@@ -58,7 +58,7 @@ Even though codebase is miniscule, there're a few things to do for those who are
 * Repo structure
 - ~src/~ :: main directory with all scripts;
 - ~tb/~ :: testing data and crude tests for decoder;
-- ~msc/~ :: miscellaneous files and resources (mainly app icon and macro for save harvesting);
+- ~msc/~ :: miscellaneous files and resources (mainly original disassembly dump, app's icon and macro for save harvesting);
 - ~make.red~ :: "makefile" for debugging/releasing.
 
 * API
