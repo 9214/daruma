@@ -98,3 +98,11 @@ retreat: func [
         ] 
     ] context reduce [to set-word! index none]
 ]
+
+unfold: func [spec /local bits index][
+    rejoin collect [
+        repeat index length? bits: charset spec [
+            if bits/:index [keep to char! index]
+        ]
+    ]
+]

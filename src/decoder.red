@@ -6,69 +6,30 @@ Red [
     Tabs:    4
 ]
 
-; == macros ==
-#do [
-    unfold: func [range [block!] /local spec index bump range*][
-        range*: copy range
-        to string! collect [
-            while [not tail? range*][
-                spec: head remove at take/part range* 3 2
-                forall spec [poke spec 1 to char! form first spec]
-                set [index bump] spec
-
-                until [keep to char! index (index: index + 1) > bump]
-            ]
-        ]
-    ]
-
-    prime?: func [number [integer!] /local bump i][                                    ;@ hard-won version which works the same both compiled and interpreted; ugly, but practical
-        either number >= i: 2 [
-            while [i <= to integer! square-root number][
-                if number // i = 0 [return no]
-                i: i + 1
-            ]
-        ][
-            return no
-        ]
-        return yes
-    ]
-]
-
-#macro make-base64: func [/local alphanumeric][
-    append
-        alphanumeric: sort/case unfold [a - z A - Z 0 - 9]
-        reduce [take/part alphanumeric 10 "+/"]
-]
-
-#macro make-bge-base64: func [/local bge-base64][
-    also 
-        bge-base64: make-base64                                                        ; in fact it's a mix of Base64 and Base58
-        foreach [char sub] "+?/!I+O\l&0/" [poke find/case bge-base64 char 1 sub]
-]
-
-#macro make-primes: func [bump [integer!] /local i][
-    collect [repeat i bump [if prime? i [keep i]]]
-]
-
-#macro make-key: func [][
-    reduce [reverse head remove at remove/part make-primes 37 3 3]
-]
-
 ; == core logic ==
 decoder: context [
     converter: context [
-        encoding: make-bge-base64
-        letters:  #do keep [unfold [A - Z]]
-        digits:   #do keep [unfold [0 - 9]]
+        letters:  unfold [#"A" - #"Z"]
+        digits:   unfold [#"0" - #"9"]
+        encoding: trim/all {
+            A B C D E F G H
+            + J K L M N \ P
+            Q R S T U V W X
+            Y Z a b c d e f
+            g h i j k & m n
+            o p q r s t u v
+            w x y z / 1 2 3
+            4 5 6 7 8 9 ? !
+        }
         scheme: [
             playtime             00:10:00 63:14:07                                     ; assuming you're not Sonic the Hedgehog
             pallet-game-trophies 00       02
             animals              01       56
             pearls               01       88
-            zero                 00       00                                           ;@ always zero?
+            zero                 00       00
             yo!-pearl-record     140'646  2'000'000
             locker-code          ...      ...
-            padding-zero         00       00                                           ;@ always zero?
+            padding-zero         00       00
             salt                 ...      ...
         ]
 
@@ -135,33 +96,34 @@ decoder: context [
         ]
     ]
 
-    cypher: context [
+    cipher: context [
         ~: :complement                                                                 ; sweeten with some syntactic sugar
         &: :and
         |: :or
 
-        key:       make-key
+        key:       #{25 1F 1D 17 13 11 0B 07}
         digest:    copy []
         game-data: copy []
         
         lookup-table: [
-            [ 01 007E0000h 17
-              02 00010000h 11
-              02 00000003h 03
-              03 00003F00h 08 ]
-            [ 02 07000000h 24
-              04 00FC0000h 18
-              05 0003F000h 12
-              06 00000FC0h 06
-              07 0000003Fh 00 ]
-            [ 09 1E000000h 25
-              10 01000000h 19
-              10 00001F00h 08
-              11 001F0000h 14
-              11 0000000Ch 02
-              12 00000003h 04 ]
-            [ 08 000000FCh 02
-              09 00000003h 04 ]
+        ;   <01> is reserved for playtime
+            <02> 01 007E0000h 17
+                 02 00010000h 11
+                 02 00000003h 03
+                 03 00003F00h 08
+            <03> 02 07000000h 24
+                 04 00FC0000h 18
+                 05 0003F000h 12
+                 06 00000FC0h 06
+                 07 0000003Fh 00
+            <04> 09 1E000000h 25
+                 10 01000000h 19
+                 10 00001F00h 08
+                 11 001F0000h 14
+                 11 0000000Ch 02
+                 12 00000003h 04
+            <05> 08 000000FCh 02
+                 09 00000003h 04
         ]
 
         p-box: [
@@ -174,17 +136,17 @@ decoder: context [
             subkey:  key/(_: digest/16 >> 3 & 00000007h + 1)                           ; 3 leftmost bits
             subkey*: key/((length? key) - _ + 1)
             retreat i 30 [
-                n: i * subkey  + 45 % 90
-                m: i * subkey* + 45 % 90
-                swap [ (p: n % 6)-th bit in (n - p / 6 + 1)-th block with
-                       (q: m % 6)-th bit in (m - q / 6 + 1)-th block ]
+                m: i * subkey  + 45 % 90
+                n: i * subkey* + 45 % 90
+                swap [ (p: m % 6)-th bit in (m - p / 6 + 1)-th block with
+                       (q: n % 6)-th bit in (n - q / 6 + 1)-th block ]
             ]]
             <3> [
             subkey: key/(digest/16 & 00000007h + 1)                                    ; 3 rightmost bits
             retreat i 40 [
-                n: i * subkey % 90
-                m: n % 6
-                flip [ (m)-th bit in (n - m / 6 + 1)-th block ]
+                m: i * subkey % 90
+                n: m % 6
+                flip [ (n)-th bit in (m - n / 6 + 1)-th block ]
             ]]
         ]
 
@@ -244,7 +206,9 @@ decoder: context [
         ][
             game-data: collect [
                 keep digest/15 * 60 + digest/14 * 60 + digest/16                     ; total playtime, hh:mm:ss
-                foreach entry lookup-table [                                         ; in-game collectibles stats and padding zeroes
+                foreach entry parse lookup-table [                                   ; in-game collectibles stats and padding zeroes
+                    collect some [tag! keep some integer!]
+                ][
                     keep fold map entry [index mask offset][
                         set [<> ><] do compose [
                             (if mask = 00000003h [[reverse copy]]) [>> <<]
@@ -282,7 +246,7 @@ decoder: context [
         ]
     ]
 
-    decoding-scheme: with [converter cypher][
+    decoding-scheme: with [converter cipher][
         case [
             16 <> length? text-data      [return #invalid-length]
             not internet-code? text-data [return #wrong-character]
