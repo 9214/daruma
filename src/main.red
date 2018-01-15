@@ -1,16 +1,17 @@
 Red [
-    Title:   "highlevel one-line dispatch"
-    Author:  https://github.com/9214
-    File:    %main.red
-    License: "WTFPL"
-    Tabs:    4
-    Needs:   View
-    Icon:    %../msc/mdisk.ico
+	Title: "BG&E Internet code decoder"
+	Author: "https://github.com/9214"
+	Version: 1.2.1.5
+	Icon: %../misc/mdisk.ico
+	Needs: View
 ]
 
-#include %aids.red
-#include %decoder.red
+#include %utils.red
+#include %datasheet.red
 #include %picklock.red
-#include %gui.red
-
+#include %converter.red
+#include %decoder.red
+#include %interface.red
+repo: https://github.com/9214/daruma
+system/view/capturing?: yes
 unless unlock [view/flags window [no-min no-max]]

@@ -1,22 +1,19 @@
 Red [
-    Title:   "BG&E Mdisk #13 closet picklock"
-    Author:  https://github.com/9214
+    Title:   "Akuda closet unlocker (via savegame patching)"
+    Author:  9214
     File:    %picklock.red
-    License: "WTFPL"
     Tabs:    4
+    License: ["WTFPL" - https://github.com/9214/daruma/blob/master/COPYING]
 ]
 
-picklock: context [
-    slot?: func [file [file!] /local digit [bitset!]][
-        parse file [
-            (digit: charset [#"0" - #"4"])
-            "slot" digit dot "sav"
-        ]
+picklock: context with datasheet [
+    slot?: func [file [file!]][
+        parse file slot
     ]
 
-    scan: has [file [file!] slots [block!]][
+    scan: has [file slots][
         slots: collect [
-            foreach file read %./ [
+            foreach file read what-dir [
                 if slot? file [keep file]
             ]
         ]
@@ -24,13 +21,13 @@ picklock: context [
     ]
 
     zero: func [slot [file!]][
-        write/binary/seek slot #{00} 00002D58h
+        write/binary/seek slot #{00} offset
     ]
 
-    set 'unlock has [slots [block! none!]][
+    set 'unlock has [slots][
         all [
             slots: scan
-            forall slots [zero first slots on]
+            forall slots [zero first slots]
         ]
     ]
 ]

@@ -1,6 +1,6 @@
 * About
 *daruma* is:
-- a pun on /Dar-kr-oom/;
+- a pun on Darkroom [ /Dar/ +kr+ /oom/ ];
 - Japanese /Red/ doll - a talisman that brings luck and happiness (i.e. 100% game completion);
 - a tiny little tool I wish existed back in my childhood.
 
@@ -39,12 +39,12 @@ If *you* launch *daruma* in any other directory that /doesn't looks like/ *gamed
 
 * Repo structure
 - ~src/~ :: main directory with all scripts;
-- ~tb/~ :: testing data and crude tests for decoder;
-- ~msc/~ :: miscellaneous files and resources (mainly app icon, original disassembly and macro for save harvesting).
+- ~bench/~ :: testing data and crude tests for decoder;
+- ~misc/~ :: miscellaneous files and resources (mainly app icon, original disassembly and macro for save harvesting).
 
 * API
 Two words are exposed into global context:
-- ~decode~ :: takes a valid Internet code, decodes it and spits out ~object!~ with game stats (locker code included), otherwise returns an error as ~issue!~ value.
+- ~decode~ :: takes a valid Internet code, decodes it and spits out ~object!~ with game stats (locker code included), otherwise (i.e. if code is invalid) returns ~none~;
 - ~unlock~ :: patches all savefiles in current directory; if none is found, returns ~none~.
 
 * License
