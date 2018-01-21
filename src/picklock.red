@@ -7,8 +7,11 @@ Red [
 ]
 
 picklock: context with datasheet [
-    slot?: func [file [file!]][
-        parse file slot
+    set 'unlock has [slots][
+        all [
+            slots: scan
+            forall slots [zero first slots]
+        ]
     ]
 
     scan: has [file slots][
@@ -20,14 +23,11 @@ picklock: context with datasheet [
         either empty? slots [none][slots]
     ]
 
-    zero: func [slot [file!]][
-        write/binary/seek slot #{00} offset
+    slot?: func [file [file!]][
+        parse file slot
     ]
 
-    set 'unlock has [slots][
-        all [
-            slots: scan
-            forall slots [zero first slots]
-        ]
+    zero: func [slot [file!]][
+        write/binary/seek slot #{00} offset
     ]
 ]

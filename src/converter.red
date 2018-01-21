@@ -7,20 +7,6 @@ Red [
 ]
 
 converter: context with datasheet [
-    enbase: function [code [binary!]][
-        rejoin collect [
-            foreach [index digit] code [
-                keep reduce [letters/(index + 1) digit]
-            ]
-        ]
-    ]
-
-    debase: does [
-        forall digest [
-            digest/1: subtract index? find/case encoding digest/1 1
-        ]
-    ]
-
     format: function [raw [block!] /local size type name flag][
         bytes: rejoin collect [forall raw [keep to binary! raw/1]]
         reverse/part skip bytes 4 4                                         ; N.B. little-endian order
@@ -44,6 +30,20 @@ converter: context with datasheet [
 
         object collect compose/deep/only [
             parse scheme [some [entry (unmarshall)]]
+        ]
+    ]
+
+    enbase: function [code [binary!]][
+        rejoin collect [
+            foreach [index digit] code [
+                keep reduce [letters/(index + 1) digit]
+            ]
+        ]
+    ]
+
+    debase: does [
+        forall digest [
+            digest/1: subtract index? find/case encoding digest/1 1
         ]
     ]
 ]

@@ -7,31 +7,22 @@ Red [
 ]
 
 decoder: context with [datasheet converter][
-    swap: function [spec [block!]][
-        spec: reduce spec
-        offset: extract spec 2
-        index: extract/index spec 2 2
-
-        bit: reduce [
-            digest/(index/1) >> offset/1 & 01h
-            digest/(index/2) >> offset/2 & 01h
+    set 'decode func [input [string!]][
+        if internet-code? input [
+            attempt [
+                init input
+                debase shuffle transpose 
+                then :verify then :format then :check
+            ]
         ]
-
-        position: (~ 01h << offset/1) & digest/(index/1)
-        digest/(index/1): position | (bit/2 << offset/1)
-                                                                            ; N.B. order is important
-        position: (~ 01h << offset/2) & digest/(index/2)
-        digest/(index/2): position | (bit/1 << offset/2)
     ]
 
-    flip: function [spec [block!] /local offset index][
-        set [offset index] reduce spec
+    internet-code?: func [input [string!]][
+        parse input internet-code
+    ]
 
-        position: (~ 01h << offset) & digest/:index
-        bit: digest/:index >> offset & 01h
-        flipped-bit: (~ bit) & 01h
-
-        digest/:index: position | (flipped-bit << offset)
+    init: func [input [string!]][
+        extract/into input 1 clear digest
     ]
 
     shuffle: has [index permutation][
@@ -63,6 +54,33 @@ decoder: context with [datasheet converter][
                 ] :| 0
             ]
         ]
+    ]
+
+    swap: function [spec [block!]][
+        spec: reduce spec
+        offset: extract spec 2
+        index: extract/index spec 2 2
+
+        bit: reduce [
+            digest/(index/1) >> offset/1 & 01h
+            digest/(index/2) >> offset/2 & 01h
+        ]
+
+        position: (~ 01h << offset/1) & digest/(index/1)
+        digest/(index/1): position | (bit/2 << offset/1)
+                                                                            ; N.B. order is important
+        position: (~ 01h << offset/2) & digest/(index/2)
+        digest/(index/2): position | (bit/1 << offset/2)
+    ]
+
+    flip: function [spec [block!] /local offset index][
+        set [offset index] reduce spec
+
+        position: (~ 01h << offset) & digest/:index
+        bit: digest/:index >> offset & 01h
+        flipped-bit: (~ bit) & 01h
+
+        digest/:index: position | (flipped-bit << offset)
     ]
 
     verify: function [raw [block!]][
@@ -102,23 +120,5 @@ decoder: context with [datasheet converter][
         ]
 
         all [correct? game-data]
-    ]
-
-    internet-code?: func [input [string!]][
-        parse input internet-code
-    ]
-
-    init: func [input [string!]][
-        extract/into input 1 clear digest
-    ]
-
-    set 'decode func [input [string!]][
-        if internet-code? input [
-            attempt [
-                init input
-                debase shuffle transpose 
-                then :verify then :format then :check
-            ]
-        ]
     ]
 ]
