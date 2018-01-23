@@ -57,9 +57,9 @@ decoder: context with [datasheet converter][
     ]
 
     swap: function [spec [block!]][
-        spec: reduce spec
+        spec:   reduce spec
         offset: extract spec 2
-        index: extract/index spec 2 2
+        index:  extract/index spec 2 2
 
         bit: reduce [
             digest/(index/1) >> offset/1 & 01h
@@ -84,15 +84,13 @@ decoder: context with [datasheet converter][
     ]
 
     verify: function [raw [block!]][
-        time: to time! first raw
+        time:    to time! first raw
         numbers: reduce append copy next raw [
-            to integer! time/second
-            time/minute
-            time/hour
+            time/second time/minute time/hour
         ]
 
         valid?: context [
-            sum: fold numbers :+ 0
+            sum: to integer! fold numbers :+ 0
             return equal? 
                 do checksum/condition 
                 fold map checksum/table [mask offset] bind checksum/query self :+ 0
