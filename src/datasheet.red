@@ -50,7 +50,7 @@ datasheet: context [
 
     internet-code: [size char]
     locker-code:   [2 [letter digit]]
-    slot:          ["slot" index dot "sav"]
+    slot:          [%slot index dot %sav]
 
     scheme: [
         4 time!    "Playtime"         00:10:00 - 63:14:07
