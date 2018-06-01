@@ -20,7 +20,7 @@ picklock: context with datasheet [
                 if slot? file [keep file]
             ]
         ]
-        either empty? slots [none][slots]
+        unless empty? slots [slots]
     ]
 
     slot?: func [file [file!]][
