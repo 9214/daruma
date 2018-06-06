@@ -4,7 +4,7 @@
 - Japanese /Red/ doll - a talisman that brings luck and happiness (i.e. 100% game completion);
 - a tiny little tool I wish existed back in my childhood.
 
-Maybe you didn't know up until this moment, but there's *Beyond Good & Evil* videogame, and there's collectible items in this game. There's also one /special/ collectible (MDisk #13), and there's *no* in-game way you can get it. 
+Maybe you didn't know up until this moment, but there's *Beyond Good & Evil* videogame, and there are collectible items in this game. There's also one /special/ collectible (MDisk #13), and there's *no* in-game way you can get it. 
 
 What *daruma* tries to do is to solve this (dare I say /problem/?) in an old-fashioned way. There's a [[https://9214.github.io/13][developement post]] which explains all of the stuff in a great detail.
 
@@ -25,9 +25,9 @@ Grab [[https://github.com/9214/daruma/releases/latest][latest release]] for your
 
 * Usage
 Carefully examine this terms:
-- *you* :: a person who have the game installed and obviously knows why (s)he's doing what (s)he's doing;
+- *you* :: a person who has the game installed and obviously knows why (s)he's doing what (s)he's doing;
 - *gamedir* ::  directory containing /at least one/ BG&E savegame (i.e. ~slot[0-4].sav~ file);
-- *daruma* :: tiny executable you either baked yourself or grabbed from release archive.
+- *daruma* :: tiny executable you either baked yourself or grabbed from the release archive.
 
 Good. Now, *daruma* can work in two modes as described below.
 
@@ -35,7 +35,7 @@ Good. Now, *daruma* can work in two modes as described below.
 If *you* place *daruma* in a *gamedir* and launch it, it will /silently/ patch all of the save files. After that, to unlock the infamous Akuda closet you simply need to load one of the patched saves, access keypad and press /Validate/.
 
 ** Decoder 
-If *you* launch *daruma* in any other directory that /doesn't looks like/ *gamedir* (i.e. doesn't contain any of the save files), a tiny window will pop up for you to enter 16-character Internet code. Well, just do it and hit Enter. Then, if everything is fine, write-down decoded locker code and use it to grab 13th MDisk.
+If *you* launch *daruma* in any other directory that /doesn't looks like/ *gamedir* (i.e. doesn't contain any of the save files), a small window will pop up for you to enter 16-character Internet code. Well, just do it and hit Enter. Then, if everything is fine, write-down decoded locker code and use it to grab the 13th MDisk.
 
 * Repo structure
 - ~src/~ :: main directory with all scripts;
