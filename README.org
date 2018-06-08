@@ -6,18 +6,18 @@
 
 Maybe you didn't know up until this moment, but there's *Beyond Good & Evil* videogame, and there are collectible items in this game. There's also one /special/ collectible (MDisk #13), and there's *no* in-game way you can get it. 
 
-What *daruma* tries to do is to solve this (dare I say /problem/?) in an old-fashioned way. There's a [[https://9214.github.io/13][developement post]] which explains all of the stuff in a great detail.
+What *daruma* tries to do is to solve this (dare I say /problem/?) in an old-fashioned way. There's a [[https://9214.github.io/13][development post]] which explains all of the stuff in a great detail.
 
 * Installation
 ** From release archive
-Grab [[https://github.com/9214/daruma/releases/latest][latest release]] for your platform and you're all set.
+Grab [[https://github.com/9214/daruma/releases/latest][latest release]] for your platform of choice and you're all set.
 
-*Please note* that only Win version was tested, and MacOS bundle just cross-compiled. For Linux folks - sorry guys, GTK graphical backend is a work-in-progress, hence no GUI and executable. Either use Wine or other fan-made implementations.
+*Please note* that only Windows version was tested, and MacOS bundle just cross-compiled. For Linux folks - sorry guys, GTK graphical backend is a work-in-progress, hence no GUI and executable. Either use Wine or other fan-made implementations.
 
 ** From source
 - download [[http://www.red-lang.org/p/download.html][Red toolchain]] ([[http://red.github.io/#download][mirror]]);
 - fork or download this repo;
-- compile ~./src/main.red~ with ~-e~ and ~-r~ flags. If you want to cross-compile, specify ~-t~ flag and target platform. Example:
+- compile ~./src/main.red~ with ~-e~ and ~-r~ flags. If you want to cross-compile, specify ~-t~ flag and a target platform. Example:
 #+BEGIN_SRC red
 ./red -e -r -t WindowsXP ./src/main.red -o ./daruma.exe
 #+END_SRC
@@ -26,16 +26,16 @@ Grab [[https://github.com/9214/daruma/releases/latest][latest release]] for your
 * Usage
 Carefully examine this terms:
 - *you* :: a person who has the game installed and obviously knows why (s)he's doing what (s)he's doing;
-- *gamedir* ::  directory containing /at least one/ BG&E savegame (i.e. ~slot[0-4].sav~ file);
-- *daruma* :: tiny executable you either baked yourself or grabbed from the release archive.
+- *game directory* :: directory containing /at least one/ BG&E savegame (i.e. ~slot[0-4].sav~ file);
+- *daruma* :: a tiny executable you either baked yourself or grabbed from the release archive.
 
 Good. Now, *daruma* can work in two modes as described below.
 
 ** Picklock
-If *you* place *daruma* in a *gamedir* and launch it, it will /silently/ patch all of the save files. After that, to unlock the infamous Akuda closet you simply need to load one of the patched saves, access keypad and press /Validate/.
+If *you* place *daruma* in the *game directory* and launch it, it will /silently/ patch all of the save files. After that, to unlock the infamous Akuda closet, you simply need to load one of the patched saves, access keypad of the locker and press /Validate/.
 
 ** Decoder 
-If *you* launch *daruma* in any other directory that /doesn't looks like/ *gamedir* (i.e. doesn't contain any of the save files), a small window will pop up for you to enter 16-character Internet code. Well, just do it and hit Enter. Then, if everything is fine, write-down decoded locker code and use it to grab the 13th MDisk.
+If *you* launch *daruma* in any other directory that /doesn't looks like/ *game directory* (i.e. doesn't contain any of the above mentioned save files), a small window will pop up for you to enter a 16-character Internet code. Well, just do that and hit Enter. Then, if everything is fine, write down decoded locker code and use it to grab the 13th MDisk.
 
 * Repo structure
 - ~src/~ :: main directory with all scripts;
