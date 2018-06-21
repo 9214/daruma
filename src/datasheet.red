@@ -53,14 +53,14 @@ datasheet: context [
     slot:          [%slot index dot %sav]
 
     scheme: [
-        4 time!    "Playtime"         00:10:00 - 63:14:07
-        1 integer! "Trophies"         00       - 02
-        1 integer! "Animals"          01       - 56
-        1 integer! "Pearls"           01       - 88
-        1 integer! "Zero"                      0
-        4 integer! "YO! Pearl record" 140'646  - 2'000'000
-        4 string!  "Locker code"          locker-code
-        4 integer! "Padding zeroes"            0
+        4   time!      "Playtime"           00:10:00 - 63:14:07
+        1   integer!   "Trophies"           00       - 02
+        1   integer!   "Animals"            01       - 56
+        1   integer!   "Pearls"             01       - 88
+        1   integer!   "Zero"                        0
+        4   integer!   "YO! Pearl record"   140'646  - 2'000'000
+        4   string!    "Locker code"            locker-code
+        4   integer!   "Padding zeroes"              0
     ]
 
     <DECODING>
@@ -103,9 +103,7 @@ datasheet: context [
             00000003h 00
         ]
         numbers [
-            /1/second
-            /1/minute
-            /1/hour
+            /1 [/second /minute /hour]
             /2 /3 /4 /5
         ]
         query [
