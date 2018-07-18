@@ -15,12 +15,13 @@ picklock: context with datasheet [
     ]
 
     scan: has [file slots][
-        slots: collect [
+        unless empty? slots: collect [
             foreach file read what-dir [
                 if slot? file [keep file]
             ]
+        ][
+            slots
         ]
-        unless empty? slots [slots]
     ]
 
     slot?: func [file [file!]][
