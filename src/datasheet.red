@@ -11,12 +11,13 @@ Red [
     License: ["WTFPL" - https://github.com/9214/daruma/blob/master/COPYING]
     Info:    [
         About: {
-            An experiment with data-driven programming and metaprogramming,
+            An experiment with data-driven / literate / meta programming,
             aimed to serve as a reference for other implementations.
             
             For more details about decoding algorithm and examples,
-            consult the developement post (see link below),
-            or original disassembly dump (see file path).
+            consult the development post (see link below),
+            original disassembly dump (see file path),
+            or drop me a line someplace.
         }
         Link: https://9214.github.io/13
         Path: %/misc/disasm.s
