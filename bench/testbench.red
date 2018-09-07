@@ -14,6 +14,10 @@ Red [
 pool: read/lines %../bench/data.pool
 count: 0
 foreach code pool [
-    result: decode code
-    unless result/locker-code = "N9J5" [print "oh snap" break]
+    unless all [
+        result: decode code
+        result/locker-code = "N9J5"
+    ][
+        print "oh snap" break
+    ]
 ]
