@@ -27,7 +27,7 @@ decoder: context with [datasheet converter][
 
     shuffle: has [index permutation][
         foreach [index permutation] permutation-box [
-            context bind/copy compose [
+            context bind copy/deep compose [
                 (permutation)
                 attempt [enumerate subkey]
                 retreat i count compose/deep/only [
@@ -42,7 +42,7 @@ decoder: context with [datasheet converter][
         collect [
             keep do second lookup/table
             foreach entry parse skip lookup/table 2 [
-                collect some [refinement! keep some integer!]
+                collect some [refinement! keep to [refinement! | end]]
             ][
                 keep fold map entry [index mask offset] compose/only [
                     do bind (lookup/query) context [
