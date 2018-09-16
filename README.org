@@ -45,7 +45,7 @@ If *you* launch *daruma* in any other directory that /doesn't looks like/ *game 
 * API
 Two words are exposed into global context:
 - ~decode~ :: takes a valid Internet code, decodes it and spits out ~object!~ with game stats (locker code included), otherwise (i.e. if code is invalid) returns ~none~;
-- ~unlock~ :: patches all savefiles in current directory; if none is found, returns ~none~.
+- ~unlock~ :: patches all savefiles in current directory; if none are found, returns ~none~.
 
 * License
 Peace out.
