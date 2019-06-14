@@ -11,13 +11,8 @@ Red [
 #include %../src/converter.red
 #include %../src/decoder.red
 
-pool: read/lines %../bench/data.pool
-count: 0
-foreach code pool [
-    unless all [
-        result: decode code
-        "N9J5" = select result "Locker code"
-    ][
+foreach code read/lines %../bench/data.pool [
+    unless "N9J5" = select decode code "Locker code" [
         print "oh snap" break
     ]
 ]
