@@ -11,7 +11,7 @@ decoder: context with [datasheet converter][
         if internet-code? input [
             attempt [
                 init input
-                debase shuffle transpose 
+                debase shuffle transpose
                 then :verify then :format then :check
             ]
         ]
