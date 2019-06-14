@@ -99,8 +99,8 @@ decoder: context with [datasheet converter][
         all [valid? raw]
     ]
 
-    check: function [game-data [object!]][
-        values: extract/index body-of game-data 2 2
+    check: function [game-data [map!]][
+        values: values-of game-data
         bounds: parse scheme [
             collect some [3 skip keep [skip '- skip | skip]]
         ]

@@ -19,16 +19,12 @@ converter: context with datasheet [
             value: take/part bytes size
             code?: :flag = 'locker-code
             keep reduce [
-                to set-word! replace/all name space "-" 
-                either code? [
-                    enbase value
-                ][
-                    make get type to integer! value
-                ]
+                name
+                either code? [enbase value][make get type to integer! value]
             ]
         )
 
-        object collect compose/deep/only [
+        make map! collect compose/deep/only [
             parse scheme [some [entry (unmarshall)]]
         ]
     ]

@@ -19,7 +19,7 @@ window: layout with decoder [
                 empty? input [browse repo]
                 internet-code? input [
                     either game-data: decode input [
-                        entry-box/text: game-data/locker-code
+                        entry-box/text: select game-data "Locker code"
                     ][
                         blink 239.204.203
                     ]

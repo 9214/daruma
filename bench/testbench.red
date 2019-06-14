@@ -16,7 +16,7 @@ count: 0
 foreach code pool [
     unless all [
         result: decode code
-        result/locker-code = "N9J5"
+        "N9J5" = select result "Locker code"
     ][
         print "oh snap" break
     ]
