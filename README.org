@@ -19,7 +19,7 @@ Grab [[https://github.com/9214/daruma/releases/latest][latest release]] for your
 - fork or download this repo;
 - compile ~./src/main.red~ with ~-e~ and ~-r~ flags. If you want to cross-compile, specify ~-t~ flag and a target platform. Example:
 #+BEGIN_SRC red
-./red -e -r -t WindowsXP ./src/main.red -o ./daruma.exe
+./red -e -r -t Windows -o ./daruma.exe ./src/main.red
 #+END_SRC
 - that's it, compiled binary should be in a root/specified directory.
 
