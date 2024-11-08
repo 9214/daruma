@@ -1,0 +1,57 @@
+ifdef::env-github[]
+++++
+<p align="center"><img width="40%" src="etcetera/logo.svg"></p>
+++++
+endif::[]
+ifndef::env-github[]
+image::etcetera/logo.svg[logo,40%,align='center']
+endif::[]
+
+== About
+
+*`daruma`* is:
+
+. A pun on Darkroom;
+. Japanese _Red_ doll -- a talisman that brings luck and happiness, that is: 100% game completion;
+. A handy little tool I wish existed back in my childhood.
+
+Maybe you didn't know up until this moment, but there's https://en.wikipedia.org/wiki/Beyond_Good_%26_Evil_(video_game)[Beyond Good & Evil] videogame, and there are various collectibles in it. There's also one _very_ special collectible, called MDisk #13, with *no* valid way for player to get it.
+
+So, what *`daruma`* sets out to do is to solve this -- dare I say _problem?_ -- in an old-fashioned way. An accompanying https://9214.github.io/13[development post] explains the rest of that stuff in great detail.
+
+WARNING: Finish writing everything below. Also:
+
+- [ ] View frontend (like the old one?..)
+- [ ] CLI frontend (experiment with View/CLI?..)
+
+== Setup
+
+https://www.ubisoft.com/en-us/game/beyond-good-and-evil/20th-anniversary-edition[20th Anniversary Edition], no point in providing builds, purely didactic purpose
+
+[,red]
+----
+>> daruma: https://github.com/9214/daruma
+----
+
+[,red]
+----
+>> do daruma/use.red
+----
+
+== Structure
+
+Organized as a stepwise dataflow pipeline, series of transformation passes, each has an entry point, mezzanine code and data, and also init scaffolding.
+
+== Other implementations
+
+Red is suitable for data munging, but, as a non-mainstream, highly dynamic language, it tends to trip the audience up if written idiomatically.
+I opted for visual clarity of data-driven specifications and usage of ad-hoc declarative micro-formats, rather than general-purpose algorithmic definitions in some C-style subset of a language picked as a lowest-common denominator, at the cost of metaprogramming boilerplate.
+Compensated by a dedicated writeup.
+At the other end of the spectrum, Go implementation would be preferrable.
+
+- https://darkroom.bgemyth.net
+- https://github.com/TheEntropyShard/JDarkroom
+
+== License
+
+Peace out, and "happy hunting!"
