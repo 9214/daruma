@@ -7,9 +7,9 @@ Red [
 ]
 
 unlock: function [
-    "Modify game save files"
-    file    [file!]        "Directory or a single file"
-    return: [block! none!] "Modified save files or none"
+    "Modify savegame files"
+    file    [file!]        "Name of a directory or a single file"
+    return: [block! none!] "Modified savegame files or none"
 ][
     all [
         slots: any [
@@ -23,19 +23,19 @@ unlock: function [
 
 <data>
 
-"Save file name format"
+"Savegame file name format"
 slot:  [%slot index %.sav]
 index: [#"0" - #"4"]
 
-"Byte offset into save file data"
+"Byte offset into savegame file data"
 offset: 00002D58h
 
 <code>
 
 scan: function [
-    "Scan directory for save files"
+    "Scan directory for savegame files"
     directory [file!]        "Directory to scan"
-    return:   [block! none!] "Located save files or none"
+    return:   [block! none!] "Located savegame files or none"
 ] [
     unless empty? slots: collect [
         foreach file read directory [
@@ -47,16 +47,16 @@ scan: function [
 ]
 
 slot?: function [
-    "Check if file name matches save file format"
-    file    [file!]  "File to check"
+    "Check if file name matches savegame file name format"
+    file    [file!]  "Name of the file to check"
     return: [logic!] "Boolean result"
 ][
     parse file slot
 ]
 
 zero: func [
-    "Modify game save file"
-    slot    [file!]  "Save file"
+    "Modify the savegame file"
+    slot    [file!]  "Name of the savegame file"
     return: [unset!]
 ][
     write/binary/seek slot #{00} offset
