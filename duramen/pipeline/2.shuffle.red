@@ -19,13 +19,13 @@ key: #{25 1f 1d 17 13 11 0b 07}
 
 "Permutation rounds"
 rounds: [
-    :swap 6
+    :swap 06
         index:  none
         subkey: none
         factor: none
         spec: [
-            [2 * i + (i / 6)] [i % 6]
-            [15             ] [i - 1]
+            [2 * :I + (:I / 6)] [:I % 6]
+            [15               ] [:I - 1]
         ]
     
     :swap 30
@@ -35,10 +35,10 @@ rounds: [
             key/(0 based subtract length? key 0 based index)
         ]
         factor: [
-            [i * subkey/(0 based 0) + 45 % 90]
-            [i * subkey/(0 based 1) + 45 % 90]
-            [    factor/(0 based 0)      %  6]
-            [    factor/(0 based 1)      %  6]
+            [:I * subkey/(0 based 0) + 45 % 90]
+            [:I * subkey/(0 based 1) + 45 % 90]
+            [     factor/(0 based 0)      %  6]
+            [     factor/(0 based 1)      %  6]
         ]
         spec: [
             [factor/(0 based 0) - factor/(0 based 2) / 6] [factor/(0 based 2)]
@@ -49,8 +49,8 @@ rounds: [
         index:  digest/(0 based 15) and 07h ; 3 rightmost bits
         subkey: key/(0 based index)
         factor: [
-            [i * subkey         % 90]
-            [factor/(0 based 0) %  6]
+            [:I * subkey         % 90]
+            [factor/(0 based 0)  %  6]
         ]
         spec: [
             [factor/(0 based 0) - factor/(0 based 1) / 6] [factor/(0 based 1)]
@@ -109,11 +109,11 @@ flip: function [
     ; extracting bit at specified offset from the right
     bit: byte/:value >> coordinate/:offset and 1
     ; flipping extracted bit
-    flipped-bit: 1 and complement bit
+    flip: 1 and complement bit
     ; zeroing out vacant hole in an indexed byte
     place: byte/:value and complement 1 << coordinate/:offset
     ; filling in zeroed out hole with a flipped bit
-    byte/:value: flipped-bit << coordinate/:offset or place
+    byte/:value: flip << coordinate/:offset or place
 
     digest
 ]
