@@ -8,14 +8,14 @@ pass: function [
     total: sum reduce append
         copy [time/hour time/minute to integer! time/second]
         to block! next words
-    
+
+    actual: sum collect [
+        foreach [mask offset] checksum [
+            keep total and mask >> offset
+        ]
+    ]
     ; 6 leftmost bits of 12th byte ORed with 4 rightmost bits of 11th byte
     expected: digest/(0 based 11) and 0000000Fh << 6 or digest/(0 based 12)
-    
-    actual: 0
-    foreach [mask offset] checksum [
-        actual: add actual total and mask >> offset
-    ]
 
     as-pair actual expected
 ]
