@@ -3,40 +3,18 @@
     debased: #{082A3C051C0F3B3535243739250E0432}
     shuffled: [
         #{082A3C051C0F333525243739250F041E} 
-        #{280A1615080F33252F2007352D1E151E} 
-        #{00200200220526000532121C070A001E}
+        #{280A1615081F33252F2007352D1E151E} 
+        #{00200200221526000532121C070A001E}
     ]
-    transposed: make vector! [630 66048 139622 184816137 0]
-    verified: 519x775
+    transposed: make vector! [630 66048 140646 184816137 0]
+    verified: 775x775
     reified: #[
         "Total playtime" 0:10:30
         "Trophies won" 0
         "Animals catalogued" 1
         "Pearls collected" 2
         "Zero" 0
-        "YO! Pearl record" 139622
-        "Locker code" "L4S9"
-        "Padding zeroes" 0
-    ]
-]
-
-"What the encoded data in BG&E Myth code actually encodes to (note that checksum is valid)" [
-    initialized: "+q8FcL711kn5&\Ey"
-    debased: #{082A3C051C0B3B3535242739250E0432}
-    shuffled: [
-        #{082A3C051C0B333525242739250F041E} 
-        #{280A1615080F33252F2007312D1E151E} 
-        #{002002002205260005321218070A001E}
-    ]
-    transposed: make vector! [630 66048 139622 184816137 0]
-    verified: 519x519
-    reified: #[
-        "Total playtime" 0:10:30
-        "Trophies won" 0
-        "Animals catalogued" 1
-        "Pearls collected" 2
-        "Zero" 0
-        "YO! Pearl record" 139622
+        "YO! Pearl record" 140646
         "Locker code" "L4S9"
         "Padding zeroes" 0
     ]

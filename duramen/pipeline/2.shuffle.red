@@ -59,6 +59,27 @@ rounds: [
 
 <code>
 
+pluck: function [
+    "Read out the bit sitting at an offset from the right"
+    byte    [binary!]  "Digest at the byte in question"
+    offset  [integer!] "Bit offset from the right"
+    return: [integer!] "Bit that sits there"
+][
+    byte/(0 based 0) >> offset and 1
+]
+
+plant: function [
+    "Seat a bit at an offset from the right"
+    byte    [binary!]  "Digest at the byte in question"
+    offset  [integer!] "Bit offset from the right"
+    bit     [integer!] "Bit to seat there"
+    return: [binary!]  "Processed output"
+][
+    also byte byte/(0 based 0): or~
+        byte/(0 based 0) and complement 1 << offset
+        bit << offset
+]
+
 swap: function [
     "Swap two bits within digest"
     digest     [binary!] "Internet code digest"
@@ -67,28 +88,22 @@ swap: function [
     /local
         index offset
         this that
-        value
 ][
-    set [index offset value this that][x y 1 1 2]
+    set [index offset this that][x y 1 2]
 
     ; finding bytes at specified 0-based indices
     byte: reduce [
         at digest 0 based coordinate/:this/:index
         at digest 0 based coordinate/:that/:index
     ]
-    ; extracting bits at specified offsets from the right
+    ; reading out both bits before either of them is disturbed
     bit: reduce [
-        byte/:this/:value >> coordinate/:this/:offset and 1
-        byte/:that/:value >> coordinate/:that/:offset and 1
+        pluck byte/:this coordinate/:this/:offset
+        pluck byte/:that coordinate/:that/:offset
     ]
-    ; zeroing out vacant holes in indexed bytes
-    place: reduce [
-        byte/:this/:value and complement 1 << coordinate/:this/:offset
-        byte/:that/:value and complement 1 << coordinate/:that/:offset
-    ]
-    ; swapping bits around in that specific order
-    byte/:this/:value: bit/:that << coordinate/:this/:offset or place/:this
-    byte/:that/:value: bit/:this << coordinate/:that/:offset or place/:that
+    ; seating each bit where the other one sat, re-reading byte as it is written
+    plant byte/:this coordinate/:this/:offset bit/:that
+    plant byte/:that coordinate/:that/:offset bit/:this
 
     digest
 ]
@@ -100,20 +115,14 @@ flip: function [
     return:    [binary!] "Processed output"
     /local
         index offset
-        value
 ][
-    set [index offset value][x y 1]
+    set [index offset][x y]
 
     ; finding byte at specified 0-based index
     byte: at digest 0 based coordinate/:index
-    ; extracting bit at specified offset from the right
-    bit: byte/:value >> coordinate/:offset and 1
-    ; flipping extracted bit
-    flip: 1 and complement bit
-    ; zeroing out vacant hole in an indexed byte
-    place: byte/:value and complement 1 << coordinate/:offset
-    ; filling in zeroed out hole with a flipped bit
-    byte/:value: flip << coordinate/:offset or place
+    ; seating the complement of whatever sits there
+    bit: pluck byte coordinate/:offset
+    plant byte coordinate/:offset 1 and complement bit
 
     digest
 ]
