@@ -2,7 +2,7 @@ Red [
     Title:   "Interfacing with the end user"
     Author:  @9214
     Date:    09-Nov-2024
-    File:    %use.red
+    File:    %wish.red
     License: "0-clause BSD"
 ]
 
