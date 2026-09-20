@@ -60,19 +60,19 @@ rounds: [
 <code>
 
 pluck: function [
-    "Read out the bit sitting at an offset from the right"
+    "Read out the bit located at an offset from the right"
     byte    [binary!]  "Digest at the byte in question"
     offset  [integer!] "Bit offset from the right"
-    return: [integer!] "Bit that sits there"
+    return: [integer!] "Bit that is located there"
 ][
     byte/(0 based 0) >> offset and 1
 ]
 
 plant: function [
-    "Seat a bit at an offset from the right"
+    "Place a bit at an offset from the right"
     byte    [binary!]  "Digest at the byte in question"
     offset  [integer!] "Bit offset from the right"
-    bit     [integer!] "Bit to seat there"
+    bit     [integer!] "Bit to place there"
     return: [binary!]  "Processed output"
 ][
     also byte byte/(0 based 0): or~
@@ -101,7 +101,7 @@ swap: function [
         pluck byte/:this coordinate/:this/:offset
         pluck byte/:that coordinate/:that/:offset
     ]
-    ; seating each bit where the other one sat, re-reading byte as it is written
+    ; placing each bit where the other one is located, re-reading byte as it is written
     plant byte/:this coordinate/:this/:offset bit/:that
     plant byte/:that coordinate/:that/:offset bit/:this
 
