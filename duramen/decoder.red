@@ -32,7 +32,7 @@ steps: [
 
 plumbing: function ["Load pipeline transformation passes into a single namespace"][
     folder: %duramen/pipeline/
-    step:   [thru dot keep to dot ".red"]
+    step:   [thru dot keep to dot %.red]
     collect [
         foreach file sort read folder [
             keep reduce [
