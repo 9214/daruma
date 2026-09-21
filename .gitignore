@@ -1,1 +1,4 @@
+*.exe
+*.dll
 *.redbin
+libRedRT-*
